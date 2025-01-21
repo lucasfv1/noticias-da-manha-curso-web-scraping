@@ -13,20 +13,20 @@ def get_olhar_digital_news():
     news = []
 
     # Selecionar o container principal que contêm as notícias
-    feature_grid = soup.select_one("#featuredGrid")
+    featured_grid = soup.select_one("#featuredGrid")
 
     # Selecionar todas as tags a de featuredGrid
-    feature_grid = feature_grid.find_all(name="a")
+    a_tags = featured_grid.find_all(name="a")
 
     # Iterar sobre as tags a do feature_grid e adicioná-las na lista news
-    for item in feature_grid:
+    for item in a_tags:
         news.append({"title": item.get("title"), "link": item["href"]})
 
     return news
 
 
 # Função para obter as principais noticias do CNN Brasil
-def get_cnn_news():
+def get_cnn_brasil_news():
     url = "https://www.cnnbrasil.com.br/"
     response = requests.get(url)
     soup = BeautifulSoup(response.text, "html.parser")
@@ -92,7 +92,7 @@ def send_email(subject, body, sender_email, receiver_email, smtp_server, smtp_po
 
 # Obter as notícias
 olhar_digital_news = get_olhar_digital_news()
-cnn_news = get_cnn_news()
+cnn_news = get_cnn_brasil_news()
 
 # Formatar o conteúdo do email
 email_content = format_email_content(olhar_digital_news, cnn_news)

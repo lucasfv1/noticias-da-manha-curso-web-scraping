@@ -1,0 +1,5 @@
+# Ignorar arquivos de configuração da IDE
+.idea/
+
+# Ignorar pycache
+.__pycache__/
